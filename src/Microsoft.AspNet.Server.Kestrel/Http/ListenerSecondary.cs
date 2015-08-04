@@ -13,11 +13,6 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
     {
         UvPipeHandle DispatchPipe { get; set; }
 
-        public ListenerSecondary(IMemoryPool memory)
-        {
-            Memory = memory;
-        }
-
         public Task StartAsync(
             string pipeName,
             KestrelThread thread,

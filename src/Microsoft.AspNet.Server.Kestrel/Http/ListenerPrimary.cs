@@ -17,10 +17,6 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
         int _dispatchIndex;
         ArraySegment<ArraySegment<byte>> _1234 = new ArraySegment<ArraySegment<byte>>(new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) });
 
-        public ListenerPrimary(IMemoryPool memory) : base(memory)
-        {
-        }
-
         public async Task StartAsync(
             string pipeName,
             string scheme,

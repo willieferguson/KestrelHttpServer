@@ -31,11 +31,6 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
             }
         }
 
-        public Listener(IMemoryPool memory)
-        {
-            Memory = memory;
-        }
-
         public Task StartAsync(
             string scheme,
             string host,

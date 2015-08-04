@@ -8,7 +8,10 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
 {
     public class ListenerContext
     {
-        public ListenerContext() { }
+        public ListenerContext()
+        {
+            Memory = new MemoryPool();
+        }
 
         public ListenerContext(ListenerContext context)
         {
@@ -21,6 +24,6 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
 
         public Func<Frame, Task> Application { get; set; }
 
-        public IMemoryPool Memory { get; set; }
+        public IMemoryPool Memory { get; private set; }
     }
 }

@@ -116,19 +116,19 @@ namespace Microsoft.AspNet.Server.Kestrel
                 {
                     if (single)
                     {
-                        var listener = new Listener(Memory);
+                        var listener = new Listener();
                         listeners.Add(listener);
                         listener.StartAsync(scheme, host, port, thread, application).Wait();
                     }
                     else if (first)
                     {
-                        var listener = new ListenerPrimary(Memory);
+                        var listener = new ListenerPrimary();
                         listeners.Add(listener);
                         listener.StartAsync(pipeName, scheme, host, port, thread, application).Wait();
                     }
                     else
                     {
-                        var listener = new ListenerSecondary(Memory);
+                        var listener = new ListenerSecondary();
                         listeners.Add(listener);
                         listener.StartAsync(pipeName, thread, application).Wait();
                     }
