@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Server.Kestrel;
 
 namespace SampleApp
 {
@@ -11,13 +12,15 @@ namespace SampleApp
     {
         public void Configure(IApplicationBuilder app)
         {
+            ((IKestrelServerInformation)app.Server).ThreadCount = 4;
+
             app.Run(context =>
             {
-                Console.WriteLine("{0} {1}{2}{3}",
-                    context.Request.Method,
-                    context.Request.PathBase,
-                    context.Request.Path,
-                    context.Request.QueryString);
+                //Console.WriteLine("{0} {1}{2}{3}",
+                //    context.Request.Method,
+                //    context.Request.PathBase,
+                //    context.Request.Path,
+                //    context.Request.QueryString);
 
                 context.Response.ContentLength = 11;
                 context.Response.ContentType = "text/plain";
