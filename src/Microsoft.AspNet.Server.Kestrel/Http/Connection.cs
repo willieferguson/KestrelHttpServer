@@ -104,6 +104,11 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
 
         void IConnectionControl.End(ProduceEndType endType)
         {
+            if (SocketInput.Buffer.Count == 0)
+            {
+                ((SocketOutput)SocketOutput).ScheduleWrite();
+            }
+
             if (_socketClosed || (_shutdownSent && endType != ProduceEndType.SocketDisconnect))
             {
                 return;

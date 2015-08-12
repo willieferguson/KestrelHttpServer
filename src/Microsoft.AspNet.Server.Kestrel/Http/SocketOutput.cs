@@ -77,8 +77,8 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
 
                 if (_writesPending < _maxPendingWrites && immediate)
                 {
-                    ScheduleWrite();
-                    _writesPending++;
+                    //ScheduleWrite();
+                    //_writesPending++;
                 }
             }
 
@@ -89,8 +89,9 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
             }
         }
 
-        private void ScheduleWrite()
+        public void ScheduleWrite()
         {
+            _writesPending++;
             _thread.Post(obj =>
             {
                 var self = (SocketOutput)obj;
@@ -160,12 +161,12 @@ namespace Microsoft.AspNet.Server.Kestrel.Http
 
                 if (_nextWriteContext != null)
                 {
-                    ScheduleWrite();
+                    //ScheduleWrite();
                 }
                 else
                 {
-                    _writesPending--;
                 }
+                    _writesPending--;
 
                 foreach (var writeBuffer in writtenBuffers)
                 {
