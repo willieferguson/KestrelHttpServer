@@ -58,19 +58,15 @@ namespace Microsoft.AspNet.Server.Kestrel
 
         public void Stop(TimeSpan timeout)
         {
-            Post(OnStop, null);
+            Post(OnStopRude, null);
             if (!_thread.Join((int)timeout.TotalMilliseconds))
             {
-                Post(OnStopRude, null);
+                Post(OnStopImmediate, null);
                 if (!_thread.Join((int)timeout.TotalMilliseconds))
                 {
-                    Post(OnStopImmediate, null);
-                    if (!_thread.Join((int)timeout.TotalMilliseconds))
-                    {
 #if DNX451
-                        _thread.Abort();
+                    _thread.Abort();
 #endif
-                    }
                 }
             }
             if (_closeError != null)
@@ -79,13 +75,9 @@ namespace Microsoft.AspNet.Server.Kestrel
             }
         }
 
-        private void OnStop(object obj)
-        {
-            _post.Unreference();
-        }
-
         private void OnStopRude(object obj)
         {
+            _post.Unreference();
             _engine.Libuv.walk(
                 _loop,
                 (ptr, arg) =>
