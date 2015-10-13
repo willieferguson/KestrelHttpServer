@@ -1,5 +1,9 @@
 language: csharp
 sudo: false
+addons:
+  apt:
+    packages:
+      - libunwind7
 install:
   - curl -sSL https://github.com/libuv/libuv/archive/v1.4.2.tar.gz | tar zxfv - -C /tmp && cd /tmp/libuv-1.4.2/
   - sh autogen.sh
