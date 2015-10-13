@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ldconfig -p
+
 if test `uname` = Darwin; then
     cachedir=~/Library/Caches/KBuild
 else
