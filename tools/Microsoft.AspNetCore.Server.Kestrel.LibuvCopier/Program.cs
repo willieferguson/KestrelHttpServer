@@ -7,12 +7,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
 {
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
-                var packagesFolder = Environment.GetEnvironmentVariable("DNX_PACKAGES") ??
-                                     Path.Combine(GetHome(), ".nuget", "packages");
+                var packagesFolder = Environment.GetEnvironmentVariable("DOTNET_PACKAGES");
+
+                if (string.IsNullOrEmpty(packagesFolder))
+                {
+                    packagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
+                }
+                else
+                {
+                    packagesFolder += ";" + (Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? string.Empty);
+                }
+
+                if (string.IsNullOrEmpty(packagesFolder))
+                {
+                    packagesFolder = Path.Combine(GetHome(), ".dnx", "packages");
+                }
 
                 packagesFolder = Environment.ExpandEnvironmentVariables(packagesFolder);
 
@@ -39,7 +52,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
         }
 
         // Copied from DNX's DnuEnvironment.cs
-        private string GetHome()
+        private static string GetHome()
         {
 #if DNX451
             return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);

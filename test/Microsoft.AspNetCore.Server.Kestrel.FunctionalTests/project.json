@@ -5,15 +5,24 @@
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
     "Microsoft.AspNetCore.Testing": "1.0.0-*",
     "System.Net.Http": "4.0.1-*",
-    "xunit.runner.aspnet": "2.0.0-aspnet-*"
+    "xunit": "2.1.0"
   },
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "dnx451": {
+      "dependencies": {
+        "xunit.runner.console": "2.1.0"
+      }
+    },
+    "dnxcore50": {
+      "dependencies": {
+        "xunit.runner.aspnet": "2.0.0-aspnet-*"
+      }
+    }
   },
   "compilationOptions": {
     "allowUnsafe": true
   },
+  "testRunner": "xunit",
   "commands": {
     "test": "xunit.runner.aspnet -parallel none"
   }

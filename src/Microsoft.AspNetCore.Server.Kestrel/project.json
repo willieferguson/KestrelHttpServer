@@ -52,16 +52,6 @@
     "allowUnsafe": true,
     "keyFile": "../../tools/Key.snk"
   },
-  "scripts": {
-    "prepare": [
-      "dnu restore ../../tools/Microsoft.AspNetCore.Server.Kestrel.GeneratedCode",
-      "dnx -p ../../tools/Microsoft.AspNetCore.Server.Kestrel.GeneratedCode run Http/FrameHeaders.Generated.cs Http/Frame.Generated.cs"
-    ],
-    "postrestore": [
-      "dnu restore ../../tools/Microsoft.AspNetCore.Server.Kestrel.LibuvCopier",
-      "dnx -p ../../tools/Microsoft.AspNetCore.Server.Kestrel.LibuvCopier run"
-    ]
-  },
   "packInclude": {
     "/": "../../content/thirdpartynotices.txt",
     "runtimes/win7-x64/native/": "runtimes/win7-x64/native/*",
