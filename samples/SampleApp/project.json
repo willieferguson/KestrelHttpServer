@@ -13,10 +13,12 @@
     },
     "dnxcore50": {
       "dependencies": {
+        "NETStandard.Library": "1.0.0-rc2-23706",
         "System.Console": "4.0.0-*"
       }
     }
   },
+  "contentFiles": [ "hosting.json" ],
   "commands": {
     "web": "SampleApp"
   }
