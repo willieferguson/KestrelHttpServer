@@ -11,10 +11,6 @@
     "Microsoft.Extensions.Logging.Abstractions": "1.0.0-*",
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-*",
     "System.Numerics.Vectors": "4.1.1-*",
-    "Microsoft.StandardsPolice": {
-      "version": "1.0.0-*",
-      "type": "build"
-    },
     "Microsoft.AspNetCore.Internal.libuv-Darwin": {
       "version": "1.0.0-*",
       "type": "build"
@@ -26,7 +22,11 @@
     "System.Threading.Tasks.Extensions": "4.0.0-*"
   },
   "frameworks": {
-    "net451": { },
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Threading.Tasks": ""
+      }
+    },
     "dotnet5.4": {
       "dependencies": {
         "System.Collections": "4.0.11-*",

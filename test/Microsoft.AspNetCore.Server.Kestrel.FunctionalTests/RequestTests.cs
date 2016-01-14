@@ -25,10 +25,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         [FrameworkSkipCondition(RuntimeFrameworks.Mono, SkipReason = "Test hangs after execution on Mono.")]
         public async Task LargeUpload()
         {
+            var port = PortManager.GetPort();
             var config = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "server.urls", "http://localhost:8791/" }
+                    { "server.urls", $"http://localhost:{port}/" }
                 })
                 .Build();
 
@@ -69,7 +70,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         bytes[i] = (byte)i;
                     }
 
-                    var response = await client.PostAsync("http://localhost:8791/", new ByteArrayContent(bytes));
+                    var response = await client.PostAsync($"http://localhost:{port}/", new ByteArrayContent(bytes));
                     response.EnsureSuccessStatusCode();
                     var sizeString = await response.Content.ReadAsStringAsync();
                     Assert.Equal(sizeString, bytes.Length.ToString(CultureInfo.InvariantCulture));

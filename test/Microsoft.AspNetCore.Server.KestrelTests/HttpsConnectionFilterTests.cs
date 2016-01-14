@@ -58,13 +58,12 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                 var handler = new WinHttpHandler();
                 handler.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 #endif
-
-                var serverAddress = "https://localhost:54321/";
+                var serverAddress = $"https://localhost:{TestServer.GetNextPort()}/";
                 var serviceContext = new TestServiceContext()
                 {
                     ConnectionFilter = new HttpsConnectionFilter(
                         new HttpsConnectionFilterOptions
-                        { ServerCertificate = new X509Certificate2(@"TestResources/testCert.pfx", "testPassword")},
+                        { ServerCertificate = new X509Certificate2(GetTestCertificatePath(), "testPassword")},
                         new NoOpConnectionFilter())
                 };
 
@@ -108,13 +107,13 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                 handler.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 #endif
 
-                var serverAddress = "https://localhost:54321/";
+                var serverAddress = $"https://localhost:{TestServer.GetNextPort()}/";
                 var serviceContext = new TestServiceContext()
                 {
                     ConnectionFilter = new HttpsConnectionFilter(
                         new HttpsConnectionFilterOptions
                         {
-                            ServerCertificate = new X509Certificate2(@"TestResources/testCert.pfx", "testPassword"),
+                            ServerCertificate = new X509Certificate2(GetTestCertificatePath(), "testPassword"),
                             ClientCertificateMode = ClientCertificateMode.RequireCertificate
                         },
                         new NoOpConnectionFilter())
@@ -157,13 +156,13 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                 handler.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 #endif
 
-                var serverAddress = "https://localhost:54321/";
+                var serverAddress = $"https://localhost:{TestServer.GetNextPort()}/";
                 var serviceContext = new TestServiceContext()
                 {
                     ConnectionFilter = new HttpsConnectionFilter(
                         new HttpsConnectionFilterOptions
                         {
-                            ServerCertificate = new X509Certificate2(@"TestResources/testCert.pfx", "testPassword"),
+                            ServerCertificate = new X509Certificate2(GetTestCertificatePath(), "testPassword"),
                             ClientCertificateMode = ClientCertificateMode.AllowCertificate
                         },
                         new NoOpConnectionFilter())
@@ -209,13 +208,13 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                 ServicePointManager.ServerCertificateValidationCallback += validationCallback;
 #endif
 
-                var serverAddress = "https://localhost:54321/";
+                var serverAddress = $"https://localhost:{TestServer.GetNextPort()}/";
                 var serviceContext = new TestServiceContext()
                 {
                     ConnectionFilter = new HttpsConnectionFilter(
                         new HttpsConnectionFilterOptions
                         {
-                            ServerCertificate = new X509Certificate2(@"TestResources/testCert.pfx", "testPassword"),
+                            ServerCertificate = new X509Certificate2(GetTestCertificatePath(), "testPassword"),
                             ClientCertificateMode = ClientCertificateMode.RequireCertificate,
                             ClientCertificateValidation = (certificate, chain, sslPolicyErrors) => true
                         },
@@ -238,10 +237,10 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                     // of the certificate authorities sent by the server in the SSL handshake.
                     using (var client = new TcpClient())
                     {
-                        await client.ConnectAsync("127.0.0.1", 54321);
+                        await client.ConnectAsync("127.0.0.1", server.Port);
 
                         SslStream stream = new SslStream(client.GetStream(), false, (sender, certificate, chain, errors) => true,
-                            (sender, host, certificates, certificate, issuers) => new X509Certificate2(@"TestResources/testCert.pfx", "testPassword"));
+                            (sender, host, certificates, certificate, issuers) => new X509Certificate2(GetTestCertificatePath(), "testPassword"));
                         await stream.AuthenticateAsClientAsync("localhost");
 
                         var request = Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n");
@@ -281,13 +280,13 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
                 handler.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 #endif
 
-                var serverAddress = "https://localhost:54321/";
+                var serverAddress = $"https://localhost:{TestServer.GetNextPort()}/";
                 var serviceContext = new TestServiceContext()
                 {
                     ConnectionFilter = new HttpsConnectionFilter(
                         new HttpsConnectionFilterOptions
                         {
-                            ServerCertificate = new X509Certificate2(@"TestResources/testCert.pfx", "testPassword")
+                            ServerCertificate = new X509Certificate2(GetTestCertificatePath(), "testPassword")
                         },
                         new NoOpConnectionFilter())
                 };
@@ -309,6 +308,18 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
 #if DNX451
                 ServicePointManager.ServerCertificateValidationCallback -= validationCallback;
 #endif
+            }
+        }
+
+        private static string GetTestCertificatePath()
+        {
+            if (Directory.GetCurrentDirectory().Contains(".testPublish"))
+            {
+                return "../../TestResources/testCert.pfx";
+            }
+            else
+            {
+                return "TestResources/testCert.pfx";
             }
         }
     }

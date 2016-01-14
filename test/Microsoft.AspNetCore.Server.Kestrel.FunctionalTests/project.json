@@ -24,6 +24,6 @@
   },
   "testRunner": "xunit",
   "commands": {
-    "test": "xunit.runner.aspnet -parallel none"
+    "test": "xunit.runner.aspnet"
   }
 }
