@@ -9,16 +9,16 @@
     "Microsoft.AspNet.Hosting": "1.0.0-*"
   },
   "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Console": "4.0.0-*"
+      }
+    },
     "dnx451": {
       "frameworkAssemblies": {
         "System.Runtime": "",
         "System.Text.Encoding": "",
         "System.Threading.Tasks": ""
-      }
-    },
-    "dnxcore50": {
-      "dependencies": {
-        "System.Console": "4.0.0-*"
       }
     }
   }
