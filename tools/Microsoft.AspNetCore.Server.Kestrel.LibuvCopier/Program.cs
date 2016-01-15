@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
                 }
                 else
                 {
-                    packagesFolder += ";" + (Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? string.Empty);
+                    packagesFolder += Path.PathSeparator + (Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? string.Empty);
                 }
 
                 if (string.IsNullOrEmpty(packagesFolder))

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Threading;
+
 namespace Microsoft.AspNet.Server.Kestrel.FunctionalTests
 {
     public static class PortManager
@@ -9,7 +11,7 @@ namespace Microsoft.AspNet.Server.Kestrel.FunctionalTests
 
         public static int GetPort()
         {
-            return _nextPort++;
+            return Interlocked.Increment(ref _nextPort);
         }
     }
 }

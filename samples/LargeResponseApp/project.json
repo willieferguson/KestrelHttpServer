@@ -14,5 +14,5 @@
       }
     }
   },
-  "contentFiles": [ "hosting.json" ]
+  "content": [ "hosting.json" ]
 }

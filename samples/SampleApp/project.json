@@ -18,7 +18,7 @@
       }
     }
   },
-  "contentFiles": [ "hosting.json" ],
+  "content": [ "hosting.json" ],
   "commands": {
     "web": "SampleApp"
   }
