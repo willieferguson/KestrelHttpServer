@@ -41,6 +41,7 @@ namespace LargeResponseApp
         {
             var host = new WebHostBuilder()
                 .UseDefaultConfiguration(args)
+                .UseApplicationBasePath(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
 
