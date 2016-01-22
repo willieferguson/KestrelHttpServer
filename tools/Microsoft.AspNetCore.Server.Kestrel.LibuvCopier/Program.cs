@@ -11,20 +11,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
         {
             try
             {
-                var packagesFolder = Environment.GetEnvironmentVariable("DOTNET_PACKAGES");
+                var packagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
 
                 if (string.IsNullOrEmpty(packagesFolder))
                 {
-                    packagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
-                }
-                else
-                {
-                    packagesFolder += Path.PathSeparator + (Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? string.Empty);
-                }
-
-                if (string.IsNullOrEmpty(packagesFolder))
-                {
-                    packagesFolder = Path.Combine(GetHome(), ".dnx", "packages");
+                    packagesFolder = Path.Combine(GetHome(), ".nuget", "packages");
                 }
 
                 packagesFolder = Environment.ExpandEnvironmentVariables(packagesFolder);
