@@ -3,7 +3,7 @@
 
 using System.Threading;
 
-namespace Microsoft.AspNet.Server.Kestrel.FunctionalTests
+namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 {
     public static class PortManager
     {
