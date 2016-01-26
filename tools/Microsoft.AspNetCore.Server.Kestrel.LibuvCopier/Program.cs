@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
 
                 if (string.IsNullOrEmpty(packagesFolder))
                 {
-                    packagesFolder = Path.Combine(GetHome(), ".nuget", "packages");
+                    packagesFolder = Path.Combine(GetHome(), ".dnx", "packages");
                 }
 
                 packagesFolder = Environment.ExpandEnvironmentVariables(packagesFolder);
