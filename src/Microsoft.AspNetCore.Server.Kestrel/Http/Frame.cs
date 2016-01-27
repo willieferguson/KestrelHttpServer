@@ -298,7 +298,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Http
                 try
                 {
                     ConnectionControl.End(ProduceEndType.SocketDisconnect);
-                    SocketInput.AbortAwaiting();
                 }
                 catch (Exception ex)
                 {
