@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
@@ -48,7 +49,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.LibuvCopier
 #if DNX451
             return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 #else
-            var runtimeEnv = Extensions.PlatformAbstractions.PlatformServices.Default.Runtime;
+            var runtimeEnv = PlatformServices.Default.Runtime;
             if (runtimeEnv.OperatingSystem == "Windows")
             {
                 return Environment.GetEnvironmentVariable("USERPROFILE") ??

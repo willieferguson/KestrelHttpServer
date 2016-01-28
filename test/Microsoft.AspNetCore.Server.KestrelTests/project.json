@@ -31,7 +31,6 @@
     },
     "testRunner": "xunit",
     "commands": {
-        "run": "Microsoft.AspNetCore.Server.KestrelTests",
         "test": "xunit.runner.aspnet"
     },
     "content": [

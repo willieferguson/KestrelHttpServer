@@ -4,7 +4,6 @@
         "emitEntryPoint": true
     },
     "dependencies": {
-        "Microsoft.Dnx.Compilation.CSharp.Abstractions": "1.0.0-*",
         "Microsoft.AspNetCore.Http.Features": "1.0.0-*",
         "Microsoft.AspNetCore.Hosting": "1.0.0-*"
     },
